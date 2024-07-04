@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zephira Player</title>
     <link rel="stylesheet" href="./assets/css/index.css">
-    <script src="./assets/js/main.js" defer>
+    <script src="./assets/js/init.js" defer>
 
     </script>
 </head>
@@ -20,98 +20,55 @@
     </div>
     <div class="mixed_wrapper">
         <div class="side_navigation_wrapper">
-            <div>
-                Home
+            <div data-media_curation_event="">
+                Curation
             </div>
             <hr>
-            <div>
-                Player
+            <div data-media_player_event="">
+                Media Player
             </div>
             <hr>
             <div>
                 Settings
             </div>
         </div>
-        <div class="media_wrapper">
+
+
+        <div class="curation_wrapper" data-curation_wrapper="">
+            <img src="./assets/reference/ref.png" class="curation_thumbnail" />
+            <div class="curation_icon_collection" data-curation_icon_collection>
+                <div class="curation_space"></div>
+                <hr>
+                <!-- Curation Icons Here -->
+            </div>
+        </div>
+        <div class="media_wrapper" data-media_wrapper="">
             <div class="media_column">
-                <video class="media_visual" src="" poster="./assets/icons/Zephira.png">
+                <video class="media_visual" src="" poster="./assets/icons/Zephira.png" data-media_visual="">
 
                 </video>
+                <label for="track_mode" class="label">
+                    Mode: 
+                </label>
+                <select name="value" id="track_mode" class="label">
+                    <option value="default">default</option>
+                    <option value="random">random</option>
+                    <option value="reverse">reverse</option>
+                    <option value="repeat">repeat</option>
+                </select>
+                <label for="idle_mode" class="label">
+                    Idle: 
+                </label>
+                <select name="value" id="idle_mode" class="label">
+                    <option value="none">none</option>
+                    <option value="default">default</option>
+                    <option value="random">random</option>
+                    <option value="reverse">reverse</option>
+                    <option value="repeat">repeat</option>
+                </select>
 
             </div>
             <div class="media_list">
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
-                <div class="media_track">
-                    <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
-                    <div class="track_title" data-track_title="">
-                        No One ~ Artist
-                    </div>
-                </div>
                 <div class="media_track">
                     <img src="./assets/icons/Zephira.png" alt="" class="track_visual" loading="lazy" data-track_visual="">
                     <div class="track_title" data-track_title="">
@@ -122,16 +79,16 @@
         </div>
     </div>
 
-    <div class="player_wrapper">
-        <div class="player_controls">
+    <div class="media_controls_wrapper">
+        <div class="media_controls">
             <img class="prev p_controls" data-prev="" src="./assets/icons/previous.webp" alt="&lt;" draggable="false">
             <img class="status_playing p_controls" data-status_playing="" src="./assets/icons/play.webp" alt="&lt;|" draggable="false">
             <img class="next p_controls" data-next="" src="./assets/icons/next.webp" alt="&gt;" draggable="false">
         </div>
-        <input type="range" min="0" max="100" value="80" class="progress">
-        <div class="player_info">
-            <img src="./assets/icons/Zephira.png" class="player_cover" >
-            <div class="player_title">
+        <input type="range" min="0" max="100" value="80" class="media_progress">
+        <div class="media_info">
+            <img src="./assets/icons/Zephira.png" class="media_cover" >
+            <div class="media_title">
                 &lt; No Selected Track &gt;
             </div>
         </div>

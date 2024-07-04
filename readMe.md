@@ -1,3 +1,3 @@
-# version 0.0.0.1
+# version 0.0.0.2 : Prototype
 
-### Personal Music Player For Locally Stored Media
+### Personal Music Player For Locally Stored Media 
