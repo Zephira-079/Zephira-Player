@@ -11,6 +11,22 @@
     /* border: solid 1px green; */
 }
 
+*::selection {
+    background-color: indianred;
+    color: white;
+}
+*::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: indianred;
+    border-radius: 10px;
+}
+*::-webkit-scrollbar-track {
+    background-color: lavenderblush;
+}
+
 body {
     background-color: ivory;
 
@@ -198,8 +214,9 @@ body {
 }
 .curation_container {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: row;
+    width: 80dvw;
+    /* flex-wrap: wrap; */
     gap: 1em;
 
     background-color: inherit;
@@ -209,10 +226,13 @@ body {
     overflow-x: scroll;
 }
 .curation_frame {
+    display: inline-block;
+
     border: solid 1px black;
     aspect-ratio: 1/1;
     height: clamp(100px, 10vw, 130px);
     transition: all .1s ease-out;
+    transform: scale(1);
 }
 .curation_preview {
     height: 100%;
@@ -223,6 +243,24 @@ body {
 .curation_frame:hover {
     scale: 1.1;
     box-shadow: 1px 1px 20px indianred;
+}
+.curation_add {
+    position: absolute;
+    z-index: auto;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 20px;
+    min-width: 20px;
+    max-height: 26px;
+    max-width: 26px;
+    color: white;
+    background-color: rgba(205, 92, 92, 0.9);
+    text-shadow: 1px 1px 1px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
 }
 
 .media_wrapper {
@@ -240,7 +278,7 @@ body {
     height: 100%;
     flex-basis: 50%;
     max-width: 40vw;
-    background-color: ivory;
+    background-color: lavender;
 
     display: block;
     display: flex;
@@ -266,6 +304,7 @@ body {
     border: solid 1px black;
 
     margin: 1em 0 ;
+    background-color: black;
     
 }
 
@@ -288,6 +327,8 @@ body {
     width: 50px;
     aspect-ratio: 1;
     margin: .5em;
+    object-fit: cover;
+    content-visibility: auto;
 }
 .track_title {
     flex-grow: 1;
@@ -306,5 +347,7 @@ body {
     text-align: center;
     padding: .25em 0;
     border-radius: 10px;
-    background-color: beige;
+    color: aliceblue;
+    background-color: indianred;
+    margin: .25em;
 }

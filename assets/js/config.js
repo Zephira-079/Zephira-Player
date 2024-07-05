@@ -6,21 +6,10 @@ const curation_config = (() => {
         "lapix - Day by day (PSYQUI Remix).mp4",
         "Mihka! X Kyoto Black – Kodokushi (孤独死).mp4",
         "Stay For A Night.mp4",
-        "Gimme ya candy.mp4",
-        "Koro  Madeon - All My Friends (Kagi Remix).mp4",
-        "lapix - Day by day (PSYQUI Remix).mp4",
-        "Mihka! X Kyoto Black – Kodokushi (孤独死).mp4",
-        "Stay For A Night.mp4",
-        "Gimme ya candy.mp4",
-        "Koro  Madeon - All My Friends (Kagi Remix).mp4",
-        "lapix - Day by day (PSYQUI Remix).mp4",
-        "Mihka! X Kyoto Black – Kodokushi (孤独死).mp4",
-        "Stay For A Night.mp4",
-        "Gimme ya candy.mp4",
-        "Koro  Madeon - All My Friends (Kagi Remix).mp4",
-        "lapix - Day by day (PSYQUI Remix).mp4",
-        "Mihka! X Kyoto Black – Kodokushi (孤独死).mp4",
-        "Stay For A Night.mp4",
+        "So in to you.mp4",
+        "AImee.mp4",
+        "blue roar.mp4",
+        "snooze.mp4"
     ]
 
 

@@ -1,9 +1,6 @@
 window.onload = function() {
-    // fetch
-    OnLoadRequireJS('./assets/js/fetch.js')
-
-    // storage
-    OnLoadRequireJS('./assets/js/storage.js')
+    // fetch, storage, get, ...etc
+    OnLoadRequireJS('./assets/js/utility.js')
 
     // media_manager
     OnLoadRequireJS('./assets/js/media_manager.js')

@@ -19,19 +19,22 @@ function icon_collection(label) {
         self() {
             return curation_icons_wrapper
         }, 
-        async add_curation(source) {
-            const source_part = source.split(/[/\\]/)
+        async add_curation(abs_path) {
 
             const curation_frame = document.createElement("div")
             curation_frame.setAttribute("class", "curation_frame")
-            curation_frame.setAttribute("data-curation_name", source_part[source_part.length - 1])
+            curation_frame.setAttribute("data-curation_name", get_filename(abs_path))
         
             const curation_preview = document.createElement("video")
             curation_preview.setAttribute("class", "curation_preview")
-            curation_preview.src = `${source}`
+            curation_preview.src = `${abs_path}`
             curation_preview.currentTime = 10
 
-            curation_frame.append(curation_preview)
+            const curation_add = document.createElement("div")
+            curation_add.setAttribute("class", "curation_add")
+            curation_add.textContent = "+"
+
+            curation_frame.append(curation_preview, curation_add)
             curation_container.append(curation_frame)
 
             curation_frame.addEventListener("mouseover", async () => {
@@ -41,14 +44,18 @@ function icon_collection(label) {
                 curation_preview.pause()
                 curation_preview.currentTime = 10
             })
+            curation_preview.addEventListener("click",async (e) => {
+                await play(abs_path)
+            })
+            curation_add.addEventListener("click",async (e) => {
+                await add_track(abs_path)
+            })
         },
         remove_curation(index) {
             curation_container.children[index].remove()
         }
     }
 }
-
-
 
 
 
