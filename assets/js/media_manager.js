@@ -20,7 +20,11 @@ async function add_track(abs_path) {
     track_visual.setAttribute("class", "track_visual")
     track_visual.src = `${await extractImageFromVideo(abs_path)}`
     track_visual.loading = "lazy"
-    track_visual.alt = ":)"
+    track_visual.alt = ""
+    track_visual.onerror = function () {
+        this.onerror = null
+        this.src = get_poster()
+    }
 
     const track_title = document.createElement("div")
     track_title.setAttribute("class","track_title")

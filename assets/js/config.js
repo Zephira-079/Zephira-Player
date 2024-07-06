@@ -1,5 +1,9 @@
 
-const curation_config = (() => {
+function get_poster() {
+    return "./assets/icons/Zephira.png"
+}
+
+const curation_config = (async () => {
     const curation_list = [
         "Gimme ya candy.mp4",
         "Koro  Madeon - All My Friends (Kagi Remix).mp4",

@@ -29,6 +29,9 @@ function icon_collection(label) {
             curation_preview.setAttribute("class", "curation_preview")
             curation_preview.src = `${abs_path}`
             curation_preview.currentTime = 10
+            // curation_preview.preload = "none"
+            curation_preview.dataset.src = `${abs_path}`
+            curation_preview.poster = get_poster()
 
             const curation_add = document.createElement("div")
             curation_add.setAttribute("class", "curation_add")
@@ -38,10 +41,13 @@ function icon_collection(label) {
             curation_container.append(curation_frame)
 
             curation_frame.addEventListener("mouseover", async () => {
+                // this wasn't even here "pauseAndWait"
+                await pauseAndWait(curation_preview)
                 await curation_preview.play()
             })
             curation_frame.addEventListener("mouseout", async () => {
-                curation_preview.pause()
+                // curation_preview.pause()
+                await pauseAndWait(curation_preview)
                 curation_preview.currentTime = 10
             })
             curation_preview.addEventListener("click",async (e) => {

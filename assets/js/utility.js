@@ -42,6 +42,10 @@ function extractImageFromVideo(abs_path) {
     })
 }
 
+function sleep(seconds) {
+    return new Promise(resolve => setTimeout(resolve, seconds * 1000))
+}
+
 function getLocalStorage(key) {
     return new Promise((resolve, reject) => {
         try {
@@ -103,5 +107,22 @@ async function retrieveXMLContent(filePath) {
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
+}
+
+function pauseAndWait(mediaElement) {
+    // async version for mediaElement.pause()
+    return new Promise((resolve, reject) => {
+        mediaElement.pause()
+
+        if (mediaElement.paused) {
+            resolve()
+        } else {
+            const onPause = () => {
+                mediaElement.removeEventListener('pause', onPause)
+                resolve()
+            }
+            mediaElement.addEventListener('pause', onPause)
+        }
+    })
 }
 
