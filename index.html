@@ -44,9 +44,12 @@
         </div>
         <div class="media_wrapper" data-media_wrapper="">
             <div class="media_column">
-                <video class="media_visual" src="" poster="./assets/icons/Zephira.png" data-media_visual="">
+                <video class="media_visual" src=""  data-media_visual="" poster="./assets/icons/Zephira.png">
 
                 </video>
+                <div class="media_visual_label" data-media_visual_label="">
+                    &lt; No Media Selected &gt;
+                </div>
                 <label for="track_mode" class="label">
                     Mode: 
                 </label>
@@ -80,10 +83,10 @@
             <img class="status_playing p_controls" data-status_playing="" src="./assets/icons/play.webp" alt="&lt;|" draggable="false">
             <img class="next p_controls" data-next="" src="./assets/icons/next.webp" alt="&gt;" draggable="false">
         </div>
-        <input type="range" min="0" max="100" value="80" class="media_progress">
+        <input type="range" min="0" max="100" value="0" class="media_progress" data-media_progress="">
         <div class="media_info">
-            <img src="./assets/icons/Zephira.png" class="media_cover" >
-            <div class="media_title">
+            <img src="./assets/icons/Zephira.png" class="media_cover" data-media_cover="" >
+            <div class="media_title" data-media_title="">
                 &lt; No Selected Track &gt;
             </div>
         </div>

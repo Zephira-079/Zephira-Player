@@ -42,7 +42,7 @@ function icon_collection(label) {
 
             curation_frame.addEventListener("mouseover", async () => {
                 // this wasn't even here "pauseAndWait"
-                await pauseAndWait(curation_preview)
+                // await pauseAndWait(curation_preview)
                 await curation_preview.play()
             })
             curation_frame.addEventListener("mouseout", async () => {

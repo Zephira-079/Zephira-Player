@@ -125,6 +125,9 @@ body {
 
 .media_cover {
     height: 80%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .media_title {
@@ -175,7 +178,8 @@ body {
 }
 
 .curation_wrapper {
-    display: block;
+    /* display: block; */
+    display: none;
 
     flex-basis: 80%;
     height: 100%;
@@ -264,8 +268,8 @@ body {
 }
 
 .media_wrapper {
-    /* display: flex; */
-    display: none;
+    display: flex;
+    /* display: none; */
     justify-content: center;
     align-items: center;
 
@@ -350,4 +354,24 @@ body {
     color: aliceblue;
     background-color: indianred;
     margin: .25em;
+}
+
+.media_visual_label {
+    display: block;
+
+    width: 90%;
+    text-align: center;
+    border-radius: 10px;
+    border: double 6px indianred ;
+    color: aliceblue;
+    background-color: aliceblue;
+    color: indianred;
+    text-shadow: 1px 1px 1px indianred;
+    margin: .25em;
+    padding: .5em;
+    min-height: 51px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
