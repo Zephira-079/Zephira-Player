@@ -59,6 +59,12 @@ function icon_collection(label) {
         },
         remove_curation(index) {
             curation_container.children[index].remove()
+        },
+        remove_all() {
+            curation_container.replaceChildren()
+        },
+        change_name(text) {
+            curation_label.textContent = text
         }
     }
 }

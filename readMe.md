@@ -1,4 +1,4 @@
-# version 0.0.0.5.1 : Prototype
+# version 0.0.0.6.1 : Prototype
 
 ### Personal Music Player For Locally Stored Media 
 
@@ -7,4 +7,4 @@
 
 #### UP-date?
 
-- update some progress
+- update some settings and configs #not finish
