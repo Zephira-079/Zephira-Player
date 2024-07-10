@@ -5,7 +5,6 @@ function get_poster() {
     return "./assets/icons/Zephira.png"
 }
 
-
 async function createConfigInstance() {
     const config_instance = document.createElement("div")
     config_instance.setAttribute("class", "config_instance")
@@ -50,12 +49,12 @@ async function createConfigInstance() {
 
     collection_name_input.addEventListener("input", (e) => {
         icon_curation.change_name(e.target.value)
+        config_instance.dataset.collection_name = e.target.value
     })
 
     //
 
-
-    add_many.addEventListener("click", () => {
+    function addMany() {
         const div = document.createElement("div")
 
         const config_source_id = crypto.randomUUID()
@@ -68,6 +67,8 @@ async function createConfigInstance() {
         config_source_input.setAttribute("class", "config_inputfield")
         config_source_input.placeholder = "https://example.com/example.json "
         config_source_input.id = config_source_id
+        config_source_input.dataset.name = "config_source_name" // dataset
+        config_source_input.value = ""
 
         const allocator_id = crypto.randomUUID()
         const allocator_name = document.createElement("label")
@@ -79,10 +80,12 @@ async function createConfigInstance() {
         allocator_input.setAttribute("class", "config_inputfield")
         allocator_input.placeholder = "Ex: ['list'][0]"
         allocator_input.id = allocator_id
+        allocator_input.dataset.name = "allocator_name" // dataset
+        allocator_input.value = ""
 
         div.append(config_source_name, config_source_input, allocator_name, allocator_input)
         config_sources.append(div)
-        
+
         let curation_list;
         `[
             "Gimme ya candy.mp4",
@@ -97,8 +100,11 @@ async function createConfigInstance() {
         ]`;
 
         `./assets/test`;
-        
-        config_source_input.addEventListener("input", () => {
+
+        `https://zephira-079.github.io/rcph_player_src/KawaiiNyahn/`;
+        `https://zephira-079.github.io/zephira/list.json`;
+
+        async function loadCuration() {
             if (!isValidURL(config_source_input.value)) {
                 try {
                     curation_list = JSON.parse(allocator_input.value)
@@ -107,50 +113,148 @@ async function createConfigInstance() {
                     curation_list = allocator_input.value.split(",")
                 }
             }
-
-            icon_curation.remove_all()
-            curation_list.forEach(names => {
-                icon_curation.add_curation(config_source_input.value + "/" + names)
-            })
-            console.log(curation_list)
-        })
-
-        allocator_input.addEventListener("input", () => {
-            if (!isValidURL(config_source_input.value)) {
-                try {
-                    curation_list = JSON.parse(allocator_input.value)
-                }
-                catch {
-                    curation_list = allocator_input.value.split(",")
-                }
+            else if (isValidURL(config_source_input.value)) {
+                curation_list = JSON.parse(await retrieveContent(allocator_input.value)) || []
             }
+
             icon_curation.remove_all()
             curation_list.forEach(names => {
                 icon_curation.add_curation(config_source_input.value + "/" + names)
             })
-            console.log(curation_list)
+        }
+
+        async function onInputChange(element) {
+
+            await loadCuration()
+
+            // update dataset ex: title:2er78er34 = ./assets/test
+            config_instance.dataset[`${element.dataset.name}:${element.id.split("-").join("")}`] = element.value
+            instanceSave()
+        }
+
+        config_source_input.addEventListener("input",async () => {
+           await onInputChange(config_source_input)
+
         })
+
+        allocator_input.addEventListener("input",async () => {
+           await onInputChange(allocator_input)
+        })
+
+        return {
+            config(id, value, dataKey) {
+                config_instance.dataset[`${dataKey}`] = value
+
+                config_source_name.setAttribute("for", id)
+                config_source_input.id = id
+                config_source_input.value = value
+            },
+            allocate(id, value, dataKey) {
+                config_instance.dataset[`${dataKey}`] = value
+
+                allocator_name.setAttribute("for", id)
+                allocator_input.id = id
+                allocator_input.value = value
+            },
+            async load_curation() {
+                return await loadCuration()
+            }
+        }
+    }
+
+    add_many.addEventListener("click", () => {
+        addMany()
     })
 
     add_only.addEventListener("click", () => {
 
     })
 
-    remove.addEventListener("click", () => {
+    remove.addEventListener("click", async () => {
         const current_config_sources = config_sources.children
         if (current_config_sources.length <= 0) {
             config_instance.remove()
+
+            await instanceSave()
             return
         }
 
+        console.log("<------------- removed results --------------->")
+
+
+        const matchedConfigElements = Array.from(current_config_sources[current_config_sources.length - 1].querySelectorAll("[data-name]"))
+        for (let input_element of matchedConfigElements) {
+            const name_id = `${input_element.dataset.name}:${input_element.id}`
+            // console.log(name_id)
+            console.log(config_instance.removeAttribute(`data-${name_id}`))
+        }
+
         current_config_sources[current_config_sources.length - 1].remove()
+        await instanceSave()
     })
-    
-    return config_instance
+
+    return {
+        self() {
+            return config_instance
+        },
+        add_many(id, name) {
+            return addMany(id, name)
+        },
+        change_name(text, dataKey) {
+            config_instance.dataset[`${dataKey}`] = text
+            collection_name_input.value = text
+        }
+    }
 
 }
 
 
-add_config_instance.addEventListener("click",async () => {
-    config_list.append(await createConfigInstance())
+add_config_instance.addEventListener("click", async () => {
+    config_list.append((await createConfigInstance()).self())
 })
+
+async function instanceSave() {
+    const instanceData = Array.from(config_list.children).map(element => {
+        return element.dataset
+    })
+    await setLocalStorage("instanceData", JSON.stringify(instanceData))
+}
+
+async function loadInstances() {
+    const instanceData = (JSON.parse(await getLocalStorage("instanceData"))) || []
+
+    for (const data of instanceData) {
+        let temporary_instance = null
+
+        const instance = await createConfigInstance()
+        config_list.append(instance.self())
+
+        const entries = Object.entries(data)
+        entries.forEach(([dataKey, value], index) => {
+            if (dataKey === "collection_name") {
+                instance.change_name(value, dataKey)
+            }
+            if (dataKey.startsWith("config_source_name:")) {
+                const sub_instance = instance.add_many()
+                sub_instance.config(dataKey.substring(dataKey.indexOf(":") + 1), value, dataKey)
+                temporary_instance = sub_instance
+            }
+            if (dataKey.startsWith("allocator_name:")) {
+                if (temporary_instance) {
+                    temporary_instance.allocate(dataKey.substring(dataKey.indexOf(":") + 1), value, dataKey)
+                    if (index === entries.length - 1) temporary_instance.load_curation()
+                    temporary_instance = null
+                } else {
+                    console.error("Temporary instance is null. Allocation failed for:", dataKey)
+                }
+            }
+
+            
+        })
+
+        console.log("<-------- break ----------->")
+    }
+}
+
+loadInstances()
+

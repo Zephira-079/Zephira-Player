@@ -1,4 +1,4 @@
-# version 0.0.0.6.1 : Prototype
+# version 0.0.0.6.2 : Prototype
 
 ### Personal Music Player For Locally Stored Media 
 
@@ -7,4 +7,8 @@
 
 #### UP-date?
 
-- update some settings and configs #not finish
+- hehehe buggy config.js
+
+### Dont Remember
+
+- fix before i even forgot this spaghetti code at config.js
